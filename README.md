@@ -22,7 +22,7 @@ function calculate_price:
 ```
 The above function calculates the weight of the outer shell (the outermost part of the model
 that is printed with 100% infill and has a width of `wall_width`, given as input) and the
-weight of the inner part that has a given percentage of infill, given as input.<br>
+weight of the inner part that has a certain percentage of infill, also given as input.<br>
 Note that the volume of the STL file is naively calculated as the sum of the tetrahedrons with
 one of the vertices being an arbitrary point in the mesh. Therefore, it returns an overcounted
 result for non-closed solids but it is fairly accurate for simpler, closed forms.
