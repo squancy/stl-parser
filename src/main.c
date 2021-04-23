@@ -5,18 +5,20 @@
 
 int main(int argc, char* argv[]) {
   // Convert ASCII STL file to binary
-  if (argc > 2) {
-    char* fname = argv[2]; 
+  char* fname;
+  if (argc > 1) {
+    fname = argv[1]; 
   } else {
-    printf("Usage: stla [-c=asc|bin | -i | -p <infill> <fprice> <wall-width> <material>] <filename>\n"
+    printf("Usage: stlp <filename> [-c=asc|bin | -i | -p <infill> <fprice> <wall-width> <material>]\n"
              "\t-c=asc|bin: convert to ASCII or binary STL\n"
-             "\t-i: info about STL file (closed volume, number of vertices, surface area)\n"
+             "\t-i: info about STL file (closed volume, number of vertices, surface area, number of triangles)\n"
              "\t-p <infill> <fprice>: calculates the price of an FDM 3D-printed model\n"
              "\t\t<infill>: amount of infill used by the printer in percentage (default is 20)\n"
              "\t\t<fprice>: price of 1 gramm of filament used to print the model in dollars (default is 0.08)\n"
-             "\t\t<wall-width>: width of the outer, solid wall in millimeters (default is 1.2)"
+             "\t\t<wall-width>: width of the outer, solid wall in millimeters (default is 1.2)\n"
              "\t\t<material>: type of materail used for printing, exactly one of:\n"
-             "\t\t\tPLA, ABS, PETG, TPU, WOOD\n");
+             "\t\t\tPLA, ABS, PETG, TPU, WOOD\n"
+             "\tIf only <filename> is given as argument then it's the same as executing stlp <filename> -i\n");
     exit(0); 
   }
   if (strcmp(argv[1], "-c=asc") == 0) {
@@ -25,16 +27,7 @@ int main(int argc, char* argv[]) {
     //int isValid = validateSTLFile(argv[2], 'a');
   }
 
-char* s = strip("      hello             mmm");
-printf("%s\n", s);
-/*
-printf("%s\n", strstrip("hello        mmmm"));
-printf("%s\n", strstrip("hello          mmmm"));
-printf("%s\n", strstrip("hello      mmmm        "));
-printf("%s\n", strstrip("     hello    mmmm"));
-printf("%s\n", strstrip("     hello    mmmm   "));
-printf("%s\n", strstrip(" hello  mmmm  "));
-*/
+  validateSTLFile(fname, 'a');
 
   return 0;
 }

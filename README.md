@@ -29,13 +29,14 @@ result for non-closed solids but it is fairly accurate for simpler, closed forms
 
 ## Usage
 ```
-Usage: stla [-c=asc|bin | -i | -p <infill> <fprice> <wall-width> <material>] <filename>
+Usage: stlp <filename> [-c=asc|bin | -i | -p <infill> <fprice> <wall-width> <material>]
   -c=asc|bin: convert to ASCII or binary STL
-  -i: info about STL file (closed volume, number of vertices, surface area)
+  -i: info about STL file (closed volume, number of vertices, surface area, number of triangles)
   -p <infill> <fprice>: calculates the price of an FDM 3D-printed model
     <infill>: amount of infill used by the printer in percentage (default is 20)
     <fprice>: price of 1 gramm of filament used to print the model in dollars (default is 0.08)
     <wall-width>: width of the outer, solid wall in millimeters (default is 1.2)
     <material>: type of materail used for printing, exactly one of:
       PLA, ABS, PETG, TPU, WOOD
+  If only <filename> is given as argument then it's the same as executing stlp <filename> -i
 ```
