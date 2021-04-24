@@ -115,5 +115,31 @@ int main(void) {
   char* psd5 = strcmp(words[0], x5s[0]) == 0 ? "passed" : "failed";
   printf("input: %s, output: [%s] --> %s\n", x5, words[0], psd5);
 
+  // Test input 
+  char* c1x = "a", *c2y = "+1.07792", *c3z = "9812.1766218876";
+  char* d1x = "121", *d2y = "876.12e3", *d3z = "7612.77e-9";
+  char* e1x = "-9", *e2y = "+10.69e4", *e3z = "888";
+  char* f1x = "a", *f2y = "b", *f3z = "-6371.211";
+  char* inps[4][3] = {
+    {c1x, c2y, c3z},
+    {d1x, d2y, d3z},
+    {e1x, e2y, e3z},
+    {f1x, f2y, f3z},
+  };
+
+  // Expected output
+  int c, d, e, f;
+  c = f = 0;
+  d = e = 1;
+  int sols[4] = {c, d, e, f};
+  
+  printf("\n");
+  printf("Testing int validateCoords(char* s1, char* s2, char* s3)\n");
+  for (i = 0; i < 4; i++) {
+    int res = validateCoords(inps[i][0], inps[i][1], inps[i][2]);
+    char* status = res == sols[i] ? "passed" : "failed";
+    printf("input: (%s; %s; %s), output: %d --> %s\n", inps[i][0], inps[i][1], inps[i][2], res, status);
+  }
+
   return 0;
 }
