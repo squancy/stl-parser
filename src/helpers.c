@@ -4,6 +4,9 @@
 #include <ctype.h>
 
 #define MAXCHAR 1000
+#define HEADER_BYTES 80
+#define COORD_BYTES 4
+#define ATTR_BYTES 2
 
 int isWhitespace(char c) {
   return c == ' ' || c == '\t' || c == '\f' || c == '\r' || c == '\v' || c == '\n';
@@ -133,6 +136,7 @@ int strstartsw(char* str, char* substr) {
 }
 
 // Syntactically check the validity of an STL file
+// Returns 0 if the file is syntactially invalid, 1 if correct, 2 if error while reading the file
 int validateSTLFile(char* fname, char type) {
   if (type == 'a') {
     // Validate ASCII STL
@@ -149,6 +153,9 @@ int validateSTLFile(char* fname, char type) {
       endsolid
     */
     FILE *fp = fopen(fname, "r"); 
+    if (fp == NULL) {
+      return 2;
+    }
     char buf[MAXCHAR];
     int i = 0;
 
@@ -231,6 +238,58 @@ int validateSTLFile(char* fname, char type) {
     }
   } else {
     // Validate binary STL
+    /*
+      UInt8[80] - header
+      Uint32 - num of triangles
+      Real32[3] - normal vector
+      Real32[3] - v1 x, y, z
+      Real32[3] - v2 x, y, z
+      Real32[3] - v3 x, y, z
+      Uint16[16] - attr byte count (mostly zero, now it's ignored)
+    */
+   
+    // Header does not contain relevant info but save it anyways
+    /*
+      Note: according to the specs header must not begin with the keyword "solid" in order to
+      be easily distinguishable from ASCII files
+      however, this is almost always false and should not be relied on
+    */
+    unsigned int i, j;
+    unsigned char header[80];
+    FILE* fp = fopen(fname, "rb");
+    if (fp == NULL) {
+      fclose(fp);
+      return 2;
+    }
+    
+    // Read header & num of triangles
+    unsigned int numOfTriangles;
+    if (fread(header, HEADER_BYTES, 1, fp) != 1 || fread(&numOfTriangles, COORD_BYTES , 1, fp) != 1) {
+      fclose(fp);
+      return 2;
+    }
+
+    // Validate vertices and normal vector coords
+    for (i = 0; i < numOfTriangles; i++) {
+      for (j = 0; j < 13; j++) {
+        // After a block of 16 floats there is a 2 byte unsigned int
+        // It may contain color information but that's non-standard and ignored for now
+        if (j % 12 == 0 && j != 0) {
+          unsigned int attr;
+          if (fread(&attr, ATTR_BYTES, 1, fp) != 1) {
+            fclose(fp);
+            return 2;
+          }
+        } else {
+          float v;
+          if (fread(&v, sizeof(float), 1, fp) != 1) {
+            fclose(fp);
+            return 2;
+          }
+        }
+      }
+    }
+    return 1;
   }
   return 0;
 }
