@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
     //int isValid = validateSTLFile(argv[2], 'a');
   }
 
-  validateSTLFile(fname, 'a');
+  printf("%d\n", validateSTLFile(fname, 'a'));
 
   return 0;
 }

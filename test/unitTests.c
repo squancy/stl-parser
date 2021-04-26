@@ -141,5 +141,26 @@ int main(void) {
     printf("input: (%s; %s; %s), output: %d --> %s\n", inps[i][0], inps[i][1], inps[i][2], res, status);
   }
 
+  // Test input
+  s1 = "substring";  
+  s2 = "this is a sentence";
+  s3 = "  hello ";
+  s4 = "";
+  char* inputs[4] = {s1, s2, s3, s4};
+  char* params[4] = {"sub", "this ", "hello", "x"};
+
+  // Expected output
+  int s1s, s2s, s3s, s4s;
+  s1s = s2s = 1;
+  s3s = s4s = 0;
+  int corr[4] = {s1s, s2s, s3s, s4s};
+
+  printf("\n");
+  printf("Testing int int strstartsw(char* str, char* substr)\n"); 
+  for (i = 0; i < 4; i++) {
+    char* status = strstartsw(inputs[i], params[i]) == corr[i] ? "passed" : "failed";
+    printf("input: %s, output: %d --> %s\n", inputs[i], strstartsw(inputs[i], params[i]), status);
+  }
+
   return 0;
 }

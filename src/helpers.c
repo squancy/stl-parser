@@ -73,20 +73,21 @@ char* firstSpace(char* str) {
   return res;
 }
 
-// Checks if character is alphanumeric
+// Checks if character is alphanumeric or '+' or '.'
 int isan(char c) {
-  return isalpha(c) || isdigit(c);
+  return isalpha(c) || isdigit(c) || c == '+' || c == '.';
 }
 
 // Returns true if there are more than n words in a string (separated by a space)
 int mwords(char* str, int n) {
   int i = 0, words = 0;
   while (str[i] != '\0') {
-    if ((i == 0 && str[i + 1] == ' ') || (i > 0 && isan(str[i - 1]) && str[i] == ' ' && isan(str[i + 1]))) {
+    if (str[i] == ' ') {
       words++;
     }
     i++;
   }
+  words++;
   return words > n ;
 }
 
@@ -119,6 +120,18 @@ int validateCoords(char* s1, char* s2, char* s3) {
   return !(*n1 != '\0' || *n2 != '\0' || *n3 != '\0');
 }
 
+// Checks whether string starts with a given substring
+int strstartsw(char* str, char* substr) {
+  int i = 0;
+  while (substr[i] != '\0') {
+    if (str[i] != substr[i]) {
+      return 0;
+    }
+    i++;
+  }
+  return 1;
+}
+
 // Syntactically check the validity of an STL file
 int validateSTLFile(char* fname, char type) {
   if (type == 'a') {
@@ -144,6 +157,7 @@ int validateSTLFile(char* fname, char type) {
     char* firstLine = strstrip(fgets(buf, MAXCHAR, fp));
     int moreWords = mwords(firstLine, 2);
     if (strcmp(firstSpace(firstLine), "solid") != 0 || moreWords) {
+      fclose(fp);
       return 0;
     }
     
@@ -152,6 +166,7 @@ int validateSTLFile(char* fname, char type) {
       while (i < 7) {
         char* l = fgets(buf, MAXCHAR, fp);
         if (l == NULL) {
+          fclose(fp);
           return 0;
         }
 
@@ -161,15 +176,17 @@ int validateSTLFile(char* fname, char type) {
           continue;
         }
 
-        if (strcmp(nextLine, "endsolid") == 0) {
+        if (strstartsw(nextLine, "endsolid") && !mwords(nextLine, 2)) {
           // No content can be after "endsolid" keyword
           while (1) {
             char* l = fgets(buf, MAXCHAR, fp);
             if (l == NULL) {
+              fclose(fp);
               return 1;
             }
             char* nl = strstrip(l);
             if (strlen(nl) != 0) {
+              fclose(fp);
               return 0;
             }
           }
@@ -180,6 +197,7 @@ int validateSTLFile(char* fname, char type) {
            (i == 1 && mwords(nextLine, 2)) ||
            ((i == 2 || i == 3 || i == 4) && mwords(nextLine, 4)) ||
            ((i == 5 || i == 6) && mwords(nextLine, 1))) {
+          fclose(fp);
           return 0;
         }
         
@@ -188,18 +206,23 @@ int validateSTLFile(char* fname, char type) {
         if (i == 0) {
           int keywordCheck = strcmp(words[0], "facet") == 0 && strcmp(words[1], "normal") == 0;
           if (!keywordCheck || !validateCoords(words[2], words[3], words[4])) {
+            fclose(fp);
             return 0;
           }
         } else if (i == 1 && (strcmp(words[0], "outer") != 0 || strcmp(words[1], "loop") != 0)) {
+          fclose(fp);
           return 0;
         } else if (i == 2 || i == 3 || i == 4) {
           int keywordCheck = strcmp(words[0], "vertex") == 0;
            if (!keywordCheck || !validateCoords(words[1], words[2], words[3])) {
+            fclose(fp);
             return 0;
           }          
         } else if (i == 5 && strcmp(words[0], "endloop") != 0) {
+          fclose(fp);
           return 0; 
         } else if (i == 6 && strcmp(words[0], "endfacet") != 0) {
+          fclose(fp);
           return 0;
         }
         i++;

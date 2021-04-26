@@ -8,5 +8,6 @@ char* firstSpace(char* str);
 int mwords(char* str, int n);
 void breakIntoWords(char* line, char* arr[]);
 int validateCoords(char* s1, char* s2, char* s3);
+int strstartsw(char* str, char* substr);
 
 #endif
