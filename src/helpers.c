@@ -2,11 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
-
-#define MAXCHAR 1000
-#define HEADER_BYTES 80
-#define COORD_BYTES 4
-#define ATTR_BYTES 2
+#include "headers/const.h"
 
 int isWhitespace(char c) {
   return c == ' ' || c == '\t' || c == '\f' || c == '\r' || c == '\v' || c == '\n';
@@ -154,6 +150,7 @@ int validateSTLFile(char* fname, char type) {
     */
     FILE *fp = fopen(fname, "r"); 
     if (fp == NULL) {
+      fclose(fp);
       return 2;
     }
     char buf[MAXCHAR];
@@ -292,4 +289,31 @@ int validateSTLFile(char* fname, char type) {
     return 1;
   }
   return 0;
+}
+
+// Check if a given flag exists in argv[]
+int flagExists(char* flag, char* args[], int size) {
+  int i; 
+  for (i = 1; i < size; i++) {
+    if (strcmp(args[i], flag) == 0) {
+      return 1;
+    }
+  }
+  return 0;
+}
+
+// Returns the index of filename found in in argv[]
+// If it was not found it returns -1
+int getFilename(char* args[], int size) {
+  int i;
+  FILE* fp;
+  for (i = 1; i < size; i++) {
+    if ((fp = fopen(args[i], "r")) != NULL) {
+      fclose(fp);
+      return i;
+    } else {
+      fclose(fp);
+    }
+  }
+  return -1;
 }

@@ -23,15 +23,18 @@ function calculate_price:
 The above function calculates the weight of the outer shell (the outermost part of the model
 that is printed with 100% infill and has a width of `wall_width`, given as input) and the
 weight of the inner part that has a certain percentage of infill, also given as input.<br>
-Note that the volume of the STL file is naively calculated as the sum of the tetrahedrons with
-one of the vertices being an arbitrary point in the mesh. Therefore, it returns an overcounted
-result for non-closed solids but it is fairly accurate for simpler, closed forms.
+The volume is calculated as the sum of the signed volumes of the tetrahedrons from a given
+point in space, thus it returns a correct value for STL files with an arbitrary complexity.
+There may be certain edge cases when a few triangles overlap or the STL does determine a closed
+form in space. This time an incorrect result may be produced as a result since there is no
+error checking on triangles.
 
 ## Usage
 ```
 Usage: stlp <filename> [-c=asc|bin | -i | -p <infill> <fprice> <wall-width> <material>]
-  -c=asc|bin: convert to ASCII or binary STL
+  -c=asc|bin: convert to ASCII or binary STL, output file is 'output.stl' created in the current directory
   -i: info about STL file (closed volume, number of vertices, surface area, number of triangles)
+  -h: prints usage
   -p <infill> <fprice>: calculates the price of an FDM 3D-printed model
     <infill>: amount of infill used by the printer in percentage (default is 20)
     <fprice>: price of 1 gramm of filament used to print the model in dollars (default is 0.08)

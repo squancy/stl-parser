@@ -156,10 +156,30 @@ int main(void) {
   int corr[4] = {s1s, s2s, s3s, s4s};
 
   printf("\n");
-  printf("Testing int int strstartsw(char* str, char* substr)\n"); 
+  printf("Testing int strstartsw(char* str, char* substr)\n"); 
   for (i = 0; i < 4; i++) {
     char* status = strstartsw(inputs[i], params[i]) == corr[i] ? "passed" : "failed";
     printf("input: %s, output: %d --> %s\n", inputs[i], strstartsw(inputs[i], params[i]), status);
+  }
+
+  // Test input
+  char* tinp[][3] = {
+    {"test", "../test/stl/long_ascii.stl", "stl/xyzb.stl"},
+    {"test", "hello", "stl/xyz.stl"},
+    {"does not exist", "hello", "../test/stl/short_ascii_v1.stl"},
+  };
+
+  // Expected output
+  int tout[] = {
+    1, -1, 2
+  };
+
+  printf("\n");
+  printf("Testing int getFilename(char* args[], int size)\n"); 
+  for (i = 0; i < sizeof(tout) / sizeof(tout[0]); i++) {
+    int res = getFilename(tinp[i], 3);
+    char* status = res == tout[i] ? "passed" : "failed";
+    printf("input: [%s, %s, %s], output: %d --> %s\n", tinp[i][0], tinp[i][1], tinp[i][2], res, status);
   }
 
   return 0;

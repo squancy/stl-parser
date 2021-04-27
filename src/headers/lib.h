@@ -2,5 +2,7 @@
 #define LIB_H
 
 int validateSTLFile(char* fname, char type);
+int flagExists(char* flag, char* args[], int size);
+int getFilename(char* args[], int size);
 
 #endif
