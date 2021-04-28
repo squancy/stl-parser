@@ -1,5 +1,5 @@
-#ifndef LIB_H
-#define LIB_H
+#ifndef ALL_H
+#define ALL_H
 
 int validateSTLFile(char* fname, char type);
 char* strstrip(char* str);

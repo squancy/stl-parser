@@ -27,7 +27,11 @@ The volume is calculated as the sum of the signed volumes of the tetrahedrons fr
 point in space, thus it returns a correct value for STL files with an arbitrary complexity.
 There may be certain edge cases when a few triangles overlap or the STL does determine a closed
 form in space. In this case an incorrect result may returned since there is no
-error checking on triangles.
+error checking on triangles.<br>
+Also, note that the volume calculation is dependent on the order of the vertices listed in the
+file (right-hand rule) and no error checking is done when it's not the case. When an STL is
+given as a parameter such that the order of the vertices does not follow the specification an
+incorrect volume (and perhaps price) may be returned without any warning.
 
 ## Usage
 ```

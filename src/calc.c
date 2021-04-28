@@ -102,6 +102,7 @@ void getSTLParams(char* fname, char type, float params[4]) {
     unsigned int numOfTriangles;
     fread(header, HEADER_BYTES, 1, fp);
     fread(&numOfTriangles, COORD_BYTES , 1, fp);
+    params[0] = numOfTriangles * 3;
     params[1] = numOfTriangles;
     
     int i, j;
@@ -118,7 +119,6 @@ void getSTLParams(char* fname, char type, float params[4]) {
           }
           vertices = realloc(vertices, sizeof(float) * (k + 3));
           fread(&vertices[k++], sizeof(float), 1, fp);
-          params[0]++;
         }
       }
     }
@@ -126,6 +126,5 @@ void getSTLParams(char* fname, char type, float params[4]) {
     float b = surfArea(vertices, k);
     params[2] = volume(vertices, k);
     params[3] = surfArea(vertices, k);
-    printf("vol: %f, area: %f\n", a, b);
   }
 }
