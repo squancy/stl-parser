@@ -1,6 +1,6 @@
 # STL parser
-A command line utility for converting between ASCII and binary STL files, getting the closed
-volume, number of vertices and surface area and calculating a rough price estimate of a 3D
+A command line utility for converting between ASCII and binary STL files, getting the
+volume, number of vertices & surface area and calculating a rough price estimate of a 3D
 printed model.
 
 ## Algorithm for price calculation
@@ -35,7 +35,7 @@ Usage: stlp <filename> [-c=asc|bin | -i | -p <infill> <fprice> <wall-width> <mat
   -c=asc|bin: convert to ASCII or binary STL, output file is 'output.stl' created in the current directory
   -i: info about STL file (closed volume, number of vertices, surface area, number of triangles)
   -h: prints usage
-  -p <infill> <fprice>: calculates the price of an FDM 3D-printed model
+  -p <infill> <fprice> <wall-width> <material>: calculates the price of an FDM 3D-printed model
     <infill>: amount of infill used by the printer in percentage (default is 20)
     <fprice>: price of 1 gramm of filament used to print the model in dollars (default is 0.08)
     <wall-width>: width of the outer, solid wall in millimeters (default is 1.2)
@@ -43,3 +43,5 @@ Usage: stlp <filename> [-c=asc|bin | -i | -p <infill> <fprice> <wall-width> <mat
       PLA, ABS, PETG, TPU, WOOD
   If only <filename> is given as argument then it's the same as executing stlp <filename> -i
 ```
+<b>Note:</b> `surface area` is returned in cm<sup>2</sup> and `volume` is returned in
+cm<sup>3</sup>

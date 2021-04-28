@@ -5,5 +5,6 @@
 #define HEADER_BYTES 80
 #define COORD_BYTES 4
 #define ATTR_BYTES 2
+#define KIBIBYTE 1024
 
 #endif

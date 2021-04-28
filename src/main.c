@@ -50,13 +50,13 @@ int main(int argc, char* argv[]) {
 
     // File is either ASCII or binary, get information
     char type = isASCII ? 'a' : 'b';
-    int params[4] = {0, 0, 0, 0};
+    float params[4] = {0, 0, 0, 0};
     getSTLParams(fname, type, params);
     printf("Information about %s\n", fname);
-    printf("\tNumber of vertices: %d\n", params[0]);
-    printf("\tNumber of facets: %d\n", params[1]);
-    printf("\tVolume: %d\n", params[2]);
-    printf("\tSurface area: %d\n", params[3]);
+    printf("\tNumber of vertices: %.0f\n", params[0]);
+    printf("\tNumber of facets: %.0f\n", params[1]);
+    printf("\tVolume: %.2fcm^3\n", params[2]);
+    printf("\tSurface area: %.2fcm^2\n", params[3]);
   }
 
   return 0;
