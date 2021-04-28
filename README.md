@@ -26,7 +26,7 @@ weight of the inner part that has a certain percentage of infill, also given as 
 The volume is calculated as the sum of the signed volumes of the tetrahedrons from a given
 point in space, thus it returns a correct value for STL files with an arbitrary complexity.
 There may be certain edge cases when a few triangles overlap or the STL does determine a closed
-form in space. This time an incorrect result may be produced as a result since there is no
+form in space. In this case an incorrect result may returned since there is no
 error checking on triangles.
 
 ## Usage
@@ -44,4 +44,4 @@ Usage: stlp <filename> [-c=asc|bin | -i | -p <infill> <fprice> <wall-width> <mat
   If only <filename> is given as argument then it's the same as executing stlp <filename> -i
 ```
 <b>Note:</b> `surface area` is returned in cm<sup>2</sup> and `volume` is returned in
-cm<sup>3</sup>
+cm<sup>3</sup>.
