@@ -10,11 +10,12 @@
 
 int convSTL(char* fname, char type) {
   FILE* rfp = fopen("./output.stl", "wb+");
+  FILE* fp;
   if (type == 'a') {
     // Input is binary, convert to ASCII
     int k = 0;
     unsigned char header[80];
-    FILE* fp = fopen(fname, "rb");
+    fp = fopen(fname, "rb");
     if (fp == NULL) {
       fclose(fp);
       return 2;
@@ -65,13 +66,10 @@ int convSTL(char* fname, char type) {
       k++;
     }
     fprintf(rfp, "endsolid");
-    fclose(rfp);
-    fclose(fp);
-    return 1;
   } else {
     // Input is ASCII, convert to binary
     int i;
-    FILE *fp = fopen(fname, "r"); 
+    fp = fopen(fname, "r"); 
     if (fp == NULL) {
       fclose(fp);
       return 2;
@@ -97,7 +95,7 @@ int convSTL(char* fname, char type) {
       char* l = fgets(buf, MAXCHAR, fp);
       if (l == NULL) {
         fclose(fp);
-        return 1;
+        break;
       }
 
       char* nl = strstrip(l);      
@@ -119,5 +117,8 @@ int convSTL(char* fname, char type) {
       }
     }
   }
+
+  fclose(rfp);
+  fclose(fp);
   return 1;
 }

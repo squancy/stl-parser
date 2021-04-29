@@ -14,11 +14,12 @@ However, calculating the price merely from an STL file is a lot simpler and fast
 Pseudocode for price calculation:
 ```
 function calculate_price:
-  area = surface area of mesh
-  volume = volume of mesh
+  area = surface area of mesh // in cm^2
+  volume = volume of mesh // in cm^3
   outer_shell_volume = area * wall_width 
   inner_infill_volume = volume - outer_shell_volume
-  return outer_shell_voluem * filament_density + inner_infill_volume * filament_density * wall_width
+  weight = outer_shell_volume * filament_density + inner_infill_volume * filament_density * infill // in gramm
+  return weight * filament_price_per_gramm
 ```
 The above function calculates the weight of the outer shell (the outermost part of the model
 that is printed with 100% infill and has a width of `wall_width`, given as input) and the
@@ -45,7 +46,8 @@ Usage: stlp <filename> [-c=asc|bin | -i | -p <infill> <fprice> <wall-width> <mat
     <fprice>: price of 1 gramm of filament used to print the model in dollars (default is 0.08)
     <wall-width>: width of the outer, solid wall in millimeters (default is 1.2)
     <material>: type of materail used for printing, exactly one of:
-      PLA, ABS, PETG, TPU, WOOD
+      ABS, PLA, CFRP, Plexiglass, Alumide, Aluminum, Brass, Bronze, Copper, Gold_14K, Gold_18K,
+      Polyamide_MJF, Polyamide_SLS, Rubber, Silver, Steel, Titanium, Resin
   If only <filename> is given as argument then it's the same as executing stlp <filename> -i
 ```
 <b>Note:</b> `surface area` is returned in cm<sup>2</sup> and `volume` is returned in
