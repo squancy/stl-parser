@@ -1,4 +1,4 @@
- solid TEATEST 
+solid TEATEST 
 facet normal  0.986544E+00  0.100166E+00  0.129220E+00
  outer loop
   vertex  0.167500E+02  0.505000E+02  0.000000E+00
@@ -14111,4 +14111,4 @@ facet normal  0.847501E-01  0.497376E+00  0.863386E+00
   vertex  0.842628E+02  0.649689E+02  0.325279E+02
  endloop
 endfacet
- endsolid TEATEST 
+endsolid TEATEST 

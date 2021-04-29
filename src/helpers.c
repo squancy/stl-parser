@@ -74,7 +74,7 @@ char* firstSpace(char* str) {
 
 // Checks if character is alphanumeric or '+' or '.'
 int isan(char c) {
-  return isalpha(c) || isdigit(c) || c == '+' || c == '.';
+  return isalpha(c) || isdigit(c) || c == '+' || c == '.' || c == '-';
 }
 
 // Returns true if there are more than n words in a string (separated by a space)
@@ -140,9 +140,9 @@ int validateSTLFile(char* fname, char type) {
       solid [name]
         facet normal v1 v2 v3
           outer loop
-            vertex  v1x v1y v1z
-            vertex  v2x v2y v2z
-            vertex  v3x v3y v3z
+            vertex v1x v1y v1z
+            vertex v2x v2y v2z
+            vertex v3x v3y v3z
           endloop
         endfacet  
         {...}
@@ -238,7 +238,7 @@ int validateSTLFile(char* fname, char type) {
     /*
       UInt8[80] - header
       Uint32 - num of triangles
-      Real32[3] - normal vector
+      Real32[3] - normal vector coords
       Real32[3] - v1 x, y, z
       Real32[3] - v2 x, y, z
       Real32[3] - v3 x, y, z
@@ -252,7 +252,7 @@ int validateSTLFile(char* fname, char type) {
       however, this is almost always false and should not be relied on
     */
     unsigned int i, j;
-    unsigned char header[80];
+    unsigned char header[HEADER_BYTES];
     FILE* fp = fopen(fname, "rb");
     if (fp == NULL) {
       fclose(fp);

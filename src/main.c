@@ -31,13 +31,23 @@ int main(int argc, char* argv[]) {
       printf("ERROR: File does not exists or invalid file was given\n");
       exit(0);
     }
-  } else if (flagExists("-c=asc", argv, argc)) {
+    int state = convSTL(fname, 'a');
+    if (state == 2) {
+      printf("ERROR: Could not read binary STL file\n");
+      exit(0);
+    }
+  } else if (flagExists("-c=bin", argv, argc)) {
     int valid = validateSTLFile(fname, 'a');
     if (valid == 0) {
       printf("ERROR: Invalid ASCII STL file given\n");
       exit(0);
     } else if (valid == 2) {
       printf("ERROR: File does not exists or invalid file was given\n");
+      exit(0);
+    }
+    int state = convSTL(fname, 'b');
+    if (state == 2) {
+      printf("ERROR: Could not read binary STL file\n");
       exit(0);
     }
   } else if (flagExists("-i", argv, argc)) {
@@ -52,11 +62,16 @@ int main(int argc, char* argv[]) {
     char type = isASCII ? 'a' : 'b';
     float params[4] = {0, 0, 0, 0};
     getSTLParams(fname, type, params);
-    printf("Information about %s\n", fname);
-    printf("\tNumber of vertices: %.0f\n", params[0]);
-    printf("\tNumber of facets: %.0f\n", params[1]);
-    printf("\tVolume: %.3fcm^3\n", params[2]);
-    printf("\tSurface area: %.3fcm^2\n", params[3]);
+
+    if (params[0] == 0 || params[1] == 0) {
+      printf("ERROR: Could not read STL file\n");
+    } else {
+      printf("Information about %s\n", fname);
+      printf("\tNumber of vertices: %.0f\n", params[0]);
+      printf("\tNumber of facets: %.0f\n", params[1]);
+      printf("\tVolume: %.3fcm^3\n", params[2]);
+      printf("\tSurface area: %.3fcm^2\n", params[3]);
+    }
   }
 
   return 0;
