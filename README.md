@@ -55,8 +55,8 @@ cm<sup>3</sup>.
 
 ## Compiling
 ```
-  git clone https://github.com/squancy/stl-parser
-  cd stl-parser/src
-  make
+git clone https://github.com/squancy/stl-parser
+cd stl-parser/src
+make
 ```
 It should create an executable called `stlp` in the directory.
