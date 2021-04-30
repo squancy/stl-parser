@@ -52,3 +52,11 @@ Usage: stlp <filename> [-c=asc|bin | -i | -p <infill> <fprice> <wall-width> <mat
 ```
 <b>Note:</b> `surface area` is returned in cm<sup>2</sup> and `volume` is returned in
 cm<sup>3</sup>.
+
+## Compiling
+```
+  git clone https://github.com/squancy/stl-parser
+  cd stl-parser/src
+  make
+```
+It should create an executable called `stlp` in the directory.
