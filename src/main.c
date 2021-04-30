@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
       printf("ERROR: Could not read binary STL file\n");
       exit(0);
     }
-  } else if (flagExists("-i", argv, argc)) {
+  } else if (flagExists("-i", argv, argc) || argc == 2) {
     int isASCII = validateSTLFile(fname, 'a');
     int isBinary = validateSTLFile(fname, 'b');
     if (isASCII != 1 && isBinary != 1) {
@@ -115,13 +115,14 @@ void printUsage(void) {
   printf("Usage: stlp <filename> [-c=asc|bin | -i | -p <infill> <fprice> <wall-width> <material>]\n"
            "\t-c=asc|bin: convert to ASCII or binary STL, output file is 'output.stl' created in the current directory\n"
            "\t-i: info about STL file (closed volume, number of vertices, surface area, number of triangles)\n"
-           "\t-h: prints usage"
+           "\t-h: prints usage\n"
            "\t-p <infill> <fprice> <wall-width> <material>: calculates the price of an FDM 3D-printed model\n"
            "\t\t<infill>: amount of infill used by the printer in percentage\n"
            "\t\t<fprice>: price of 1 gramm of filament used to print the model in dollars\n"
            "\t\t<wall-width>: width of the outer, solid wall in millimeters\n"
            "\t\t<material>: type of materail used for printing, exactly one of:\n"
-           "\t\t\tPLA, ABS, PETG, TPU, WOOD\n"
+           "\t\t\tABS, PLA, CFRP, Plexiglass, Alumide, Aluminum, Brass, Bronze, Copper, Gold_14K, Gold_18K,\n"
+           "\t\t\tPolyamide_MJF, Polyamide_SLS, Rubber, Silver, Steel, Titanium, Resin\n"
            "\tIf only <filename> is given as argument then it's the same as executing stlp <filename> -i\n");
 }
 
