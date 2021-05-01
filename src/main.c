@@ -29,36 +29,36 @@ int main(int argc, char* argv[]) {
     int valid = validateSTLFile(fname, 'b');
     if (valid == 0) {
       printf("ERROR: Invalid binary STL file given\n");
-      exit(0);
+      exit(EXIT_FAILURE);
     } else if (valid == 2) {
       printf("ERROR: File does not exists or invalid file was given\n");
-      exit(0);
+      exit(EXIT_FAILURE);
     }
     int state = convSTL(fname, 'a');
     if (state == 2) {
       printf("ERROR: Could not read binary STL file\n");
-      exit(0);
+      exit(EXIT_FAILURE);
     }
   } else if (flagExists("-c=bin", argv, argc)) {
     int valid = validateSTLFile(fname, 'a');
     if (valid == 0) {
       printf("ERROR: Invalid ASCII STL file given\n");
-      exit(0);
+      exit(EXIT_FAILURE);
     } else if (valid == 2) {
       printf("ERROR: File does not exists or invalid file was given\n");
-      exit(0);
+      exit(EXIT_FAILURE);
     }
     int state = convSTL(fname, 'b');
     if (state == 2) {
       printf("ERROR: Could not read binary STL file\n");
-      exit(0);
+      exit(EXIT_FAILURE);
     }
   } else if (flagExists("-i", argv, argc) || argc == 2) {
     int isASCII = validateSTLFile(fname, 'a');
     int isBinary = validateSTLFile(fname, 'b');
     if (isASCII != 1 && isBinary != 1) {
       printf("ERROR: Invalid ASCII or binary STL file was given\n");
-      exit(0);
+      exit(EXIT_FAILURE);
     }
 
     // File is either ASCII or binary, get information
@@ -68,6 +68,7 @@ int main(int argc, char* argv[]) {
 
     if (params[0] == 0 || params[1] == 0) {
       printf("ERROR: Could not read STL file\n");
+      exit(EXIT_FAILURE);
     } else {
       printf("Information about %s\n", fname);
       printf("\tNumber of vertices: %.0f\n", params[0]);
@@ -89,7 +90,7 @@ int main(int argc, char* argv[]) {
     int isBinary = validateSTLFile(fname, 'b');
     if (isASCII != 1 && isBinary != 1) {
       printf("ERROR: Invalid ASCII or binary STL file was given\n");
-      exit(0);
+      exit(EXIT_FAILURE);
     }
 
     float infill = ind + 1 < argc ? strtof(argv[ind + 1], NULL) / 100 : -1;
@@ -100,7 +101,7 @@ int main(int argc, char* argv[]) {
     // Make sure matrial is one that's supported
     if (!supportedMat(material) || infill == -1 || fprice == -1 || wallWidth == -1) {
       printf("ERROR: invalid or no parameter is given\n");
-      exit(0);
+      exit(EXIT_FAILURE);
     }
 
     char type = isASCII ? 'a' : 'b';
