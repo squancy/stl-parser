@@ -17,8 +17,5 @@ price.o: price.c
 helpers.o: helpers.c
 	gcc -c helpers.c -o helpers.o
 
-main.c, conv.c, calc.c, price.c, helpers.c:
-	echo "done"
-
 clean:
 	rm -rf *.o *.out
