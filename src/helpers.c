@@ -160,10 +160,14 @@ int validateSTLFile(char* fname, char type) {
     // Last line must be "endsolid" with some potentially empty lines after that
     char* firstLine = strstrip(fgets(buf, MAXCHAR, fp));
     int moreWords = mwords(firstLine, 2);
-    if (strcmp(firstSpace(firstLine), "solid") != 0 || moreWords) {
+    char* comp = firstSpace(firstLine);
+    if (strcmp(comp, "solid") != 0 || moreWords) {
       fclose(fp);
       return 0;
     }
+
+    free(firstLine);
+    free(comp);
     
     int j, isEnd = 0;
     while (1) {
@@ -193,6 +197,7 @@ int validateSTLFile(char* fname, char type) {
               fclose(fp);
               return 0;
             }
+            free(nl);
           }
         }
         
@@ -230,6 +235,10 @@ int validateSTLFile(char* fname, char type) {
           return 0;
         }
         i++;
+
+        for (int k = 0; k < 4; k++) {
+          free(words[k]);
+        }
       } 
       i = 0;
     }

@@ -88,7 +88,6 @@ void getSTLParams(char* fname, char type, float params[4]) {
     float v = volume(vertices, k);
     params[2] = volume(vertices, k);
     params[3] = surfArea(vertices, k);
-    free(vertices);
   } else {
     // Binary STL
     unsigned char header[80];
@@ -127,4 +126,5 @@ void getSTLParams(char* fname, char type, float params[4]) {
     params[2] = volume(vertices, k);
     params[3] = surfArea(vertices, k);
   }
+  free(vertices);
 }
