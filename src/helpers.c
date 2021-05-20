@@ -235,10 +235,6 @@ int validateSTLFile(char* fname, char type) {
           return 0;
         }
         i++;
-
-        for (int k = 0; k < 4; k++) {
-          free(words[k]);
-        }
       } 
       i = 0;
     }

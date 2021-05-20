@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "../src/headers/all.h"
+#include "../src/headers/colors.h"
 
 int main(void) {
   int i;
@@ -28,7 +29,11 @@ int main(void) {
   printf("Testing char* strip(char* str)\n");
   for (i = 0; i < 7; i++) {
     char* status = strcmp(strip(sarr[i]), carr[i]) == 0 ? "passed" : "failed";
-    printf("input: %s, output: %s --> %s\n", sarr[i], strip(sarr[i]), status);
+    if (strcmp(status, "passed") == 0) {
+      printf(GREEN "input: %s, output: %s --> %s\n" RESET, sarr[i], strip(sarr[i]), status);
+    } else {
+      printf(RED "input: %s, output: %s --> %s\n" RESET, sarr[i], strip(sarr[i]), status);
+    }
   }
 
   printf("\n");
@@ -40,7 +45,11 @@ int main(void) {
   printf("Testing char* strstrip(char* str)\n");
   for (i = 0; i < 7; i++) {
     char* status = strcmp(strstrip(sarr[i]), carr2[i]) == 0 ? "passed" : "failed";
-    printf("input: %s, output: %s --> %s\n", sarr[i], strstrip(sarr[i]), status);
+    if (strcmp(status, "passed") == 0) {
+      printf(GREEN "input: %s, output: %s --> %s\n" RESET, sarr[i], strstrip(sarr[i]), status);
+    } else {
+      printf(RED "input: %s, output: %s --> %s\n" RESET, sarr[i], strstrip(sarr[i]), status);
+    }
   }
 
   // Test input
@@ -62,7 +71,11 @@ int main(void) {
   printf("Testing char* firstSpace(char* str)\n");
   for (i = 0; i < 4; i++) {
     char* status = strcmp(firstSpace(sarr2[i]), earr[i]) == 0 ? "passed" : "failed";
-    printf("input: %s, output: %s --> %s\n", sarr2[i], firstSpace(sarr2[i]), status);
+    if (strcmp(status, "passed") == 0) {
+      printf(GREEN "input: %s, output: %s --> %s\n" RESET, sarr2[i], firstSpace(sarr2[i]), status);
+    } else {
+      printf(RED "input: %s, output: %s --> %s\n" RESET, sarr2[i], firstSpace(sarr2[i]), status);
+    }
   }
 
   // Test input
@@ -77,7 +90,11 @@ int main(void) {
   printf("Testing int mwords(char* str)\n");
   for (i = 0; i < 3; i++) {
     char* status = mwords(input[i], 3) == output[i] ? "passed" : "failed";
-    printf("input: %s, output: %d --> %s\n", input[i], mwords(input[i], 3), status);
+    if (strcmp(status, "passed") == 0) {
+      printf(GREEN "input: %s, output: %d --> %s\n" RESET, input[i], mwords(input[i], 3), status);
+    } else {
+      printf(RED "input: %s, output: %d --> %s\n" RESET, input[i], mwords(input[i], 3), status);
+    }
   }
 
   // Test input
@@ -100,20 +117,48 @@ int main(void) {
   breakIntoWords(x1, words);
   char* psd1 = (strcmp(words[0], x1s[0]) == 0 && strcmp(words[1], x1s[1]) == 0 &&
     strcmp(words[2], x1s[2]) == 0 && strcmp(words[3], x1s[3]) == 0 ? "passed" : "failed");
-  printf("input: %s, output: [%s, %s, %s, %s] --> %s\n", x1, words[0], words[1], words[2], words[3], psd1);
+  if (strcmp(psd1, "passed") == 0) {
+    printf(GREEN "input: %s, output: [%s, %s, %s, %s] --> %s\n" RESET, x1, words[0], words[1],
+      words[2], words[3], psd1);
+  } else {
+     printf(RED "input: %s, output: [%s, %s, %s, %s] --> %s\n" RESET, x1, words[0], words[1],
+      words[2], words[3], psd1);   
+  }
+
   breakIntoWords(x2, words);
   char* psd2 = (strcmp(words[0], x2s[0]) == 0 && strcmp(words[1], x2s[1]) == 0 &&
     strcmp(words[2], x2s[2]) == 0 && strcmp(words[3], x2s[3]) == 0 ? "passed" : "failed");
-  printf("input: %s, output: [%s, %s, %s, %s] --> %s\n", x2, words[0], words[1], words[2], words[3], psd2);
+  if (strcmp(psd2, "passed") == 0) {
+    printf(GREEN "input: %s, output: [%s, %s, %s, %s] --> %s\n" RESET, x2, words[0], words[1],
+      words[2], words[3], psd2);
+  } else {
+    printf(RED "input: %s, output: [%s, %s, %s, %s] --> %s\n" RESET, x2, words[0], words[1],
+      words[2], words[3], psd2);
+  }
+
   breakIntoWords(x3, words);
   char* psd3 = strcmp(words[0], x3s[0]) == 0 ? "passed" : "failed";
-  printf("input: %s, output: [%s] --> %s\n", x3, words[0], psd3);
+  if (strcmp(psd3, "passed") == 0) {
+    printf(GREEN "input: %s, output: [%s] --> %s\n" RESET, x3, words[0], psd3);
+  } else {
+    printf(RED "input: %s, output: [%s] --> %s\n" RESET, x3, words[0], psd3);
+  }  
+
   breakIntoWords(x4, words);
   char* psd4 = strcmp(words[0], x4s[0]) == 0 && strcmp(words[1], x4s[1]) == 0 ? "passed" : "failed";
-  printf("input: %s, output: [%s, %s] --> %s\n", x4, words[0], words[1], psd4);
+  if (strcmp(psd4, "passed") == 0) {
+    printf(GREEN "input: %s, output: [%s, %s] --> %s\n" RESET, x4, words[0], words[1], psd4);
+  } else {
+    printf(RED "input: %s, output: [%s, %s] --> %s\n" RESET, x4, words[0], words[1], psd4);
+  }
+
   breakIntoWords(x5, words);
   char* psd5 = strcmp(words[0], x5s[0]) == 0 ? "passed" : "failed";
-  printf("input: %s, output: [%s] --> %s\n", x5, words[0], psd5);
+  if (strcmp(psd5, "passed") == 0) {
+    printf(GREEN "input: %s, output: [%s] --> %s\n" RESET, x5, words[0], psd5);
+  } else {
+    printf(RED "input: %s, output: [%s] --> %s\n" RESET, x5, words[0], psd5);
+  } 
 
   // Test input 
   char* c1x = "a", *c2y = "+1.07792", *c3z = "9812.1766218876";
@@ -138,7 +183,13 @@ int main(void) {
   for (i = 0; i < 4; i++) {
     int res = validateCoords(inps[i][0], inps[i][1], inps[i][2]);
     char* status = res == sols[i] ? "passed" : "failed";
-    printf("input: (%s; %s; %s), output: %d --> %s\n", inps[i][0], inps[i][1], inps[i][2], res, status);
+    if (strcmp(status, "passed") == 0) {
+      printf(GREEN "input: (%s; %s; %s), output: %d --> %s\n" RESET, inps[i][0], inps[i][1],
+        inps[i][2], res, status);
+    } else {
+      printf(RED "input: (%s; %s; %s), output: %d --> %s\n" RESET, inps[i][0], inps[i][1],
+        inps[i][2], res, status);
+    }
   }
 
   // Test input
@@ -159,7 +210,13 @@ int main(void) {
   printf("Testing int strstartsw(char* str, char* substr)\n"); 
   for (i = 0; i < 4; i++) {
     char* status = strstartsw(inputs[i], params[i]) == corr[i] ? "passed" : "failed";
-    printf("input: %s, output: %d --> %s\n", inputs[i], strstartsw(inputs[i], params[i]), status);
+    if (strcmp(status, "passed") == 0) {
+      printf(GREEN "input: %s, output: %d --> %s\n" RESET, inputs[i], strstartsw(inputs[i], params[i]),
+        status);
+    } else {
+      printf(RED "input: %s, output: %d --> %s\n" RESET, inputs[i], strstartsw(inputs[i], params[i]),
+        status);
+    }
   }
 
   // Test input
@@ -179,7 +236,13 @@ int main(void) {
   for (i = 0; i < sizeof(tout) / sizeof(tout[0]); i++) {
     int res = getFilename(tinp[i], 3);
     char* status = res == tout[i] ? "passed" : "failed";
-    printf("input: [%s, %s, %s], output: %d --> %s\n", tinp[i][0], tinp[i][1], tinp[i][2], res, status);
+    if (strcmp(status, "passed") == 0) {
+      printf(GREEN "input: [%s, %s, %s], output: %d --> %s\n" RESET, tinp[i][0], tinp[i][1],
+        tinp[i][2], res, status);
+    } else {
+      printf(RED "input: [%s, %s, %s], output: %d --> %s\n" RESET, tinp[i][0], tinp[i][1],
+        tinp[i][2], res, status);
+    }
   }
 
   return 0;

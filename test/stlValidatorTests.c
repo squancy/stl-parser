@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "../src/headers/all.h"
+#include "../src/headers/colors.h"
 
 int main(void) {
   int i;
@@ -35,7 +36,11 @@ int main(void) {
   for (i = 0; i < sizeof(output) / sizeof(output[0]); i++) {
     int res = validateSTLFile(fnames[i], 'a');
     char* status = res == output[i] ? "passed" : "failed";
-    printf("input file: %s, output: %d --> %s\n", fnames[i], res, status);
+    if (strcmp(status, "passed") == 0) {
+      printf(GREEN "input file: %s, output: %d --> %s\n" RESET, fnames[i], res, status);
+    } else {
+      printf(RED "input file: %s, output: %d --> %s\n" RESET, fnames[i], res, status);
+    }
   } 
 
   char* fnames2[] = {
@@ -61,7 +66,11 @@ int main(void) {
   for (i = 0; i < sizeof(output2) / sizeof(output2[0]); i++) {
     int res = validateSTLFile(fnames2[i], 'b');
     char* status = res == output2[i] ? "passed" : "failed";
-    printf("input file: %s, output: %d --> %s\n", fnames2[i], res, status);
+    if (strcmp(status, "passed") == 0) {
+      printf(GREEN "input file: %s, output: %d --> %s\n" RESET, fnames2[i], res, status);
+    } else {
+      printf(RED "input file: %s, output: %d --> %s\n" RESET, fnames2[i], res, status);
+    }
   }
 
   return 0;

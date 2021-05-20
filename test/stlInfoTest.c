@@ -3,6 +3,7 @@
 #include <math.h>
 #include "../src/headers/all.h"
 #include "../src/headers/stl.h"
+#include "../src/headers/colors.h"
 
 #define EPSILON 0.1
 
@@ -49,8 +50,13 @@ int main(void) {
     }
 
     char* status = fl ? "passed" : "failed";
-    printf("input: %s, %c, [0, 0, 0, 0], output: %.0f, %.0f, %.3f, %.3f --> %s\n", fnames[i], types[i],
-      params[0], params[1], params[2], params[3], status);
+    if (strcmp(status, "passed") == 0) {
+      printf(GREEN "input: %s, %c, [0, 0, 0, 0], output: %.0f, %.0f, %.3f, %.3f --> %s\n" RESET,
+        fnames[i], types[i], params[0], params[1], params[2], params[3], status);
+    } else {
+      printf(RED "input: %s, %c, [0, 0, 0, 0], output: %.0f, %.0f, %.3f, %.3f --> %s\n" RESET,
+        fnames[i], types[i], params[0], params[1], params[2], params[3], status);
+    }
 
     for (j = 0; j < 4; j++) {
       params[j] = 0;
