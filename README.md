@@ -68,7 +68,7 @@ cd test
 make
 ```
 It should create four executables:
-  - `mainUnitTest` -> 'test/mainUnitTest.c'
-  - `stlInfoTest` -> 'test/stlInfoTest.c'
-  - `unitTests` -> 'test/unitTests.c'
-  - `validatorTests` -> 'test/stlValidatorTests.c'
+  - `mainUnitTest` -> `test/mainUnitTest.c`
+  - `stlInfoTest` -> `test/stlInfoTest.c`
+  - `unitTests` -> `test/unitTests.c`
+  - `validatorTests` -> `test/stlValidatorTests.c`
