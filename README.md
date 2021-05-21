@@ -64,8 +64,8 @@ It should create an executable called `stlp` in the directory.
 ## Compiling unit tests
 In case you want to check if the unit tests are passing on your machine run:
 ```
-  cd test
-  make
+cd test
+make
 ```
 It should create four executables:
   - `mainUnitTest` -> 'test/mainUnitTest.c'
