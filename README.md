@@ -60,3 +60,15 @@ cd stl-parser/src
 make
 ```
 It should create an executable called `stlp` in the directory.
+
+## Compiling unit tests
+In case you want to check if the unit tests are passing on your machine run:
+```
+  cd test
+  make
+```
+It should create four executables:
+  - `mainUnitTest` -> 'test/mainUnitTest.c'
+  - `stlInfoTest` -> 'test/stlInfoTest.c'
+  - `unitTests` -> 'test/unitTests.c'
+  - `validatorTests` -> 'test/stlValidatorTests.c'
