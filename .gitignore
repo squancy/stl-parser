@@ -4,3 +4,7 @@
 *.swo
 stlp
 *.out
+mainUnitTest
+validatorTests
+unitTests
+stlInfoTests
