@@ -26,7 +26,7 @@ that is printed with 100% infill and has a width of `wall_width`, given as input
 weight of the inner part that has a certain percentage of `infill`, also given as
 input.<br><br>
 The volume is calculated as the sum of the signed volumes of the tetrahedrons from a given
-point in space, thus it returns a correct value for STL files with an arbitrary complexity.
+point in space, thus it returns a correct value for STL files with arbitrary complexity.
 There may be certain edge cases when a few triangles overlap or the STL does determine a closed
 form in space. In this case an incorrect result may returned since there is no
 error checking on triangles.<br><br>
