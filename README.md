@@ -60,6 +60,9 @@ cd stl-parser/src
 make
 ```
 It should create an executable called `stlp` in the directory.
+<b>Note:</b> as pointed out in <a href="https://github.com/squancy/stl-parser/issues/2">this issue</a> you may
+run into an error when compiling in WSL since `gcc` will not include the math libraries. In this case add the
+`-lm` flag and it will resolve the issue.
 
 ## Compiling unit tests
 In case you want to check if the unit tests are passing on your machine run:
