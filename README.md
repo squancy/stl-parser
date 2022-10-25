@@ -50,7 +50,7 @@ Usage: stlp <filename> [-c=asc|bin | -i | -p <infill> <fprice> <wall-width> <mat
       Polyamide_MJF, Polyamide_SLS, Rubber, Silver, Steel, Titanium, Resin
   If only <filename> is given as argument then it's the same as executing stlp <filename> -i
 ```
-<b>Note:</b> `surface area` is returned in cm<sup>2</sup> and `volume` is returned in
+<br><br><b>Note:</b> `surface area` is returned in cm<sup>2</sup> and `volume` is returned in
 cm<sup>3</sup>.
 
 ## Compiling
